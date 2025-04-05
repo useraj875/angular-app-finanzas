@@ -1,14 +1,13 @@
 // src/app/app.config.ts
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router'; // Importa withComponentInputBinding si planeas pasar datos de ruta a inputs de componentes
+import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
-import { routes } from './app.routes'; // Importa tus rutas
+import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes, withComponentInputBinding()) // Provee las rutas a la aplicación
-    // Aquí añadirás provideHttpClient() más tarde cuando necesites hacer llamadas API
-    // import { provideHttpClient } from '@angular/common/http';
-    // provideHttpClient()
+    provideRouter(routes, withComponentInputBinding()),
+    provideHttpClient(withFetch())
   ]
 };

@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+/* src/styles.css */
+
+/* Apply base styles to the whole document */
+html, body {
+    height: 100%;
+    margin: 0;
+    /* THIS IS THE KEY PART: A common system font stack */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background-color: #f8f9fa; /* Your existing background color */
+    color: #212529; /* Default text color */
+    -webkit-font-smoothing: antialiased; /* Smoother fonts on WebKit (macOS/iOS) */
+    -moz-osx-font-smoothing: grayscale; /* Smoother fonts on Firefox (macOS) */
+  }
+  
+  /* Optional: Ensure headings use the same font family unless overridden */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: inherit; /* Inherit from body */
+    font-weight: 600; /* Example: make headings slightly bolder */
+    margin-top: 0; /* Reset default heading margins if desired */
+    margin-bottom: 0.5rem;
+  }
+  
+  
+  * { /* Basic box-sizing reset */
+    box-sizing: border-box;
+  }
+  
+  /* Add any other global styles here */
