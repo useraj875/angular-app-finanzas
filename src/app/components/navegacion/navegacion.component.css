@@ -1,0 +1,118 @@
+/* src/app/components/navegacion/navegacion.component.css */
+.sidebar {
+    width: 230px; /* Un poco más ancho para acomodar iconos y texto cómodamente */
+    background-color: #1e293b; /* Un azul/gris oscuro ligeramente diferente */
+    color: #cbd5e1; /* Un gris claro para el texto */
+    padding: 20px 0;
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sombra sutil a la derecha */
+    position: fixed; /* Fija el sidebar */
+    left: 0;
+    top: 0;
+    z-index: 1000; /* Asegura que esté por encima de otro contenido */
+  }
+  
+  .logo {
+    text-align: center;
+    padding: 0 15px 20px 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #334155; /* Borde separador */
+  }
+  
+  .logo i {
+    color: #34d399; /* Un color verde menta para el icono del logo */
+  }
+  
+  .logo h3 {
+    margin: 10px 0 0 0; /* Ajuste de margen */
+    color: #f1f5f9; /* Blanco/gris muy claro */
+    font-weight: 600; /* Un poco más de peso */
+  }
+  
+  .sidebar nav {
+    flex-grow: 1;
+    overflow-y: auto; /* Scroll si hay muchos elementos */
+  }
+  
+  .sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 13px 25px; /* Aumenta un poco el padding */
+    text-decoration: none;
+    color: #cbd5e1; /* Color de texto por defecto */
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-left-color 0.2s ease-in-out;
+    border-left: 4px solid transparent; /* Borde izquierdo más grueso */
+    font-size: 0.95rem; /* Tamaño de fuente ligeramente ajustado */
+  }
+  
+  .sidebar nav ul li a:hover {
+    background-color: #334155; /* Fondo al pasar el mouse */
+    color: #ffffff; /* Texto blanco al pasar el mouse */
+  }
+  
+  .sidebar nav ul li a.active-link {
+    background-color: #34d399; /* Color activo (verde menta) */
+    color: #0f172a; /* Texto oscuro para contraste en activo */
+    font-weight: 600; /* Texto en negrita para activo */
+    border-left-color: #ffffff; /* Borde blanco para activo */
+  }
+  
+  /* Estilo específico para el icono dentro del enlace activo */
+  .sidebar nav ul li a.active-link i {
+     color: #0f172a; /* Asegura que el icono también cambie de color */
+  }
+  
+  
+  .sidebar nav ul li a i {
+    margin-right: 15px; /* Más espacio entre icono y texto */
+    width: 20px; /* Ancho fijo */
+    text-align: center;
+    font-size: 1.1em; /* Tamaño del icono ligeramente más grande */
+    color: #94a3b8; /* Color grisáceo para iconos inactivos */
+    transition: color 0.2s ease-in-out; /* Transición para el color del icono */
+  }
+  
+   /* Cambia el color del icono también en hover */
+  .sidebar nav ul li a:hover i {
+     color: #ffffff;
+  }
+  
+  .sidebar nav ul li a span {
+    flex-grow: 1;
+  }
+  
+  /* Estilos para la sección inferior (opcional) */
+  .sidebar-footer {
+     padding: 15px 25px;
+     border-top: 1px solid #334155;
+     margin-top: auto; /* Empuja al fondo */
+  }
+  .sidebar-footer a {
+     display: flex;
+     align-items: center;
+     text-decoration: none;
+     color: #cbd5e1;
+     padding: 8px 0;
+     font-size: 0.9rem;
+     transition: color 0.2s ease-in-out;
+  }
+   .sidebar-footer a:hover {
+     color: #ffffff;
+   }
+  .sidebar-footer a i {
+     margin-right: 15px;
+     width: 20px;
+     text-align: center;
+     color: #94a3b8;
+  }
+   .sidebar-footer a:hover i {
+     color: #ffffff;
+   }
