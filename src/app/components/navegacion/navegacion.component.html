@@ -1,40 +1,16 @@
-<!-- src/app/components/navegacion/navegacion.component.html -->
-<aside class="sidebar">
-    <div class="logo">
-      <!-- Puedes usar un icono aquí también si quieres -->
-      <i class="fa-solid fa-piggy-bank fa-xl"></i> <!-- Ejemplo de icono para el logo -->
-      <h3 style="margin-top: 10px;">Mis Finanzas</h3>
-    </div>
-    <nav>
-      <ul>
-        <li>
-          <!-- Dashboard -->
-          <a routerLink="/dashboard" routerLinkActive="active-link" title="Dashboard">
-            <i class="fa-solid fa-chart-pie fa-fw"></i> <!-- Icono de Dashboard -->
-            <span>Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <!-- Gastos -->
-          <a routerLink="/gastos" routerLinkActive="active-link" title="Gastos">
-            <i class="fa-solid fa-money-bill-transfer fa-fw"></i> <!-- Icono de Gastos -->
-            <span>Gastos</span>
-          </a>
-        </li>
-        <li>
-          <!-- Ingresos -->
-          <a routerLink="/ingresos" routerLinkActive="active-link" title="Ingresos">
-            <i class="fa-solid fa-sack-dollar fa-fw"></i> <!-- Icono de Ingresos -->
-            <span>Ingresos</span>
-          </a>
-        </li>
-        <li>
-          <!-- Ahorros -->
-          <a routerLink="/ahorros" routerLinkActive="active-link" title="Ahorros">
-            <i class="fa-solid fa-vault fa-fw"></i> <!-- Icono de Ahorros -->
-            <span>Ahorros</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </aside>
+<!-- Mostrar el menú solo si el usuario está autenticado -->
+<nav *ngIf="isAuthenticated">
+  <ul>
+    <li><a routerLink="/dashboard">Dashboard</a></li>
+    <li><a routerLink="/tipodegasto">Gastos</a></li>
+    <li><button (click)="logout()">Cerrar sesión</button></li>
+  </ul>
+</nav>
+
+<!-- Si no está autenticado, muestra el login y registro -->
+<nav *ngIf="!isAuthenticated">
+  <ul>
+    <li><a routerLink="/login">Iniciar sesión</a></li>
+    <li><a routerLink="/register">Registrar</a></li>
+  </ul>
+</nav>
