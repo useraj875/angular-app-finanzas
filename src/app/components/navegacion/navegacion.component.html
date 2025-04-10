@@ -1,16 +1,47 @@
-<!-- Mostrar el menú solo si el usuario está autenticado -->
-<nav *ngIf="isAuthenticated">
-  <ul>
-    <li><a routerLink="/dashboard">Dashboard</a></li>
-    <li><a routerLink="/tipodegasto">Gastos</a></li>
-    <li><button (click)="logout()">Cerrar sesión</button></li>
-  </ul>
-</nav>
+<!-- src/app/components/navegacion/navegacion.component.html -->
+<aside class="sidebar">
+  <!-- Logo Area -->
+  <div class="sidebar-header">
+    <i class="fa-solid fa-piggy-bank fa-2x text-primary"></i> <!-- Use primary color -->
+    <h3 class="app-title">Mis Finanzas</h3>
+  </div>
 
-<!-- Si no está autenticado, muestra el login y registro -->
-<nav *ngIf="!isAuthenticated">
-  <ul>
-    <li><a routerLink="/login">Iniciar sesión</a></li>
-    <li><a routerLink="/register">Registrar</a></li>
-  </ul>
-</nav>
+  <!-- Navigation Links -->
+  <nav class="sidebar-nav">
+    <ul>
+      <li>
+        <a routerLink="/dashboard" routerLinkActive="active-link" title="Dashboard">
+          <i class="fa-solid fa-chart-pie fa-fw"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/gastos" routerLinkActive="active-link" title="Gastos">
+          <i class="fa-solid fa-money-bill-transfer fa-fw"></i>
+          <span>Gastos</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/ingresos" routerLinkActive="active-link" title="Ingresos">
+          <i class="fa-solid fa-sack-dollar fa-fw"></i>
+          <span>Ingresos</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/ahorros" routerLinkActive="active-link" title="Ahorros">
+          <i class="fa-solid fa-vault fa-fw"></i>
+          <span>Ahorros</span>
+        </a>
+      </li>
+      <!-- Add other links like Presupuestos here if needed -->
+    </ul>
+  </nav>
+
+  <!-- Footer section for Logout -->
+  <div class="sidebar-footer">
+     <a (click)="logout()" style="cursor: pointer;" title="Cerrar Sesión">
+       <i class="fa-solid fa-right-from-bracket fa-fw"></i>
+       <span>Cerrar Sesión</span>
+     </a>
+  </div>
+</aside>

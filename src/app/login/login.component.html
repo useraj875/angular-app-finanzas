@@ -1,20 +1,88 @@
-<h2>{{ modo === 'login' ? 'Iniciar Sesión' : 'Registrar Usuario' }}</h2>
+<!-- src/app/login/login.component.html -->
+<!-- CORRECTED VERSION -->
+<div class="login-page-wrapper">
+  <div class="login-container">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
 
-<form (ngSubmit)="modo === 'login' ? login() : registrar()" #loginForm="ngForm">
-  <label for="nombre">Nombre:</label>
-  <input type="text" [(ngModel)]="nombre" name="nombre" required />
+        <h2 class="card-title text-center mb-4">
+          {{ modo === 'login' ? 'Iniciar Sesión' : 'Registrar Usuario' }}
+        </h2>
 
-  <label for="contrasena">Contraseña:</label>
-  <input type="password" [(ngModel)]="contrasena" name="contrasena" required />
+        <form (ngSubmit)="modo === 'login' ? login() : registrar()" #loginForm="ngForm" novalidate>
 
-  <button type="submit">{{ modo === 'login' ? 'Iniciar sesión' : 'Registrar' }}</button>
-</form>
+          <!-- Username Input -->
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre de Usuario</label>
+            <input
+              type="text"
+              id="nombre"
+              class="form-control"
+              [(ngModel)]="nombre"
+              name="nombre"
+              required
+              #nombreInput="ngModel"
+              [class.is-invalid]="nombreInput.invalid && (nombreInput.dirty || nombreInput.touched)"
+              placeholder="Ingrese su nombre de usuario"
+            /> <!-- Correctly closed -->
+            <div *ngIf="nombreInput.invalid && (nombreInput.dirty || nombreInput.touched)" class="invalid-feedback">
+              El nombre de usuario es requerido.
+            </div>
+          </div>
 
-<!-- Mensajes de error o éxito -->
-<p *ngIf="error" style="color: red;">{{ error }}</p>
-<p *ngIf="mensaje" style="color: green;">{{ mensaje }}</p>
+          <!-- Password Input -->
+          <div class="mb-4">
+            <label for="contrasena" class="form-label">Contraseña</label>
+            <input
+              type="password"
+              id="contrasena"
+              class="form-control"
+              [(ngModel)]="contrasena"
+              name="contrasena"
+              required
+              #contrasenaInput="ngModel"
+              [class.is-invalid]="contrasenaInput.invalid && (contrasenaInput.dirty || contrasenaInput.touched)"
+              placeholder="Ingrese su contraseña"
+            /> <!-- Correctly closed -->
+             <div *ngIf="contrasenaInput.invalid && (contrasenaInput.dirty || contrasenaInput.touched)" class="invalid-feedback">
+              La contraseña es requerida.
+            </div>
+          </div>
 
-<!-- Botón para alternar entre login y registro -->
-<button (click)="alternarModo()">
-  {{ modo === 'login' ? '¿No tienes una cuenta? Regístrate aquí' : '¿Ya tienes cuenta? Inicia sesión aquí' }}
-</button>
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="btn btn-primary w-100"
+            [disabled]="loginForm.invalid"
+          >
+            {{ modo === 'login' ? 'Iniciar sesión' : 'Registrar' }}
+          </button>
+
+        </form>
+
+        <!-- Error Message with Icon -->
+        <div *ngIf="error" class="alert alert-danger d-flex align-items-center mt-3" role="alert">
+           <i class="fa-solid fa-circle-exclamation flex-shrink-0 me-2"></i>
+           <div>{{ error }}</div>
+        </div>
+
+        <!-- Success Message with Icon -->
+        <div *ngIf="mensaje && modo === 'registro'" class="alert alert-success d-flex align-items-center mt-3" role="alert">
+           <i class="fa-solid fa-check-circle flex-shrink-0 me-2"></i>
+           <div>{{ mensaje }}</div>
+        </div>
+
+        <!-- Cleaner Separator -->
+        <div class="separator my-4">
+            <span>O</span>
+        </div>
+
+        <!-- Toggle Mode Button - Changed to Outline -->
+        <button class="btn btn-outline-secondary w-100" (click)="alternarModo()">
+          {{ modo === 'login' ? '¿No tienes cuenta? Regístrate' : '¿Ya tienes cuenta? Inicia sesión' }}
+        </button>
+
+      </div> <!-- /card-body -->
+    </div> <!-- /card -->
+  </div> <!-- /login-container -->
+</div> <!-- /login-page-wrapper -->

@@ -1,32 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router'; // Necesario para routerLink y routerLinkActive
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+// src/app/components/navegacion/navegacion.component.ts
+import { Component } from '@angular/core';
+import { Router, RouterModule } from '@angular/router'; // Need Router for logout
+import { CommonModule } from '@angular/common'; // Might need for *ngIf if you add conditional elements
 
 @Component({
-  selector: 'app-navegacion', // Este es el tag que usarás en app.component.html
+  selector: 'app-navegacion',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule],
-  templateUrl: './navegacion.component.html',
-  styleUrl: './navegacion.component.css'
+  imports: [
+    RouterModule, // For routerLink, routerLinkActive
+    CommonModule
+  ],
+  templateUrl: './navegacion.component.html', // Use your ORIGINAL HTML
+  styleUrls: ['./navegacion.component.css'] // Use your ORIGINAL CSS
 })
-export class NavegacionComponent implements OnInit { 
-
-  isAuthenticated: boolean = false;
-
-  ngOnInit() {
-    // Verifica si el token existe en el localStorage
-    this.isAuthenticated = !!localStorage.getItem('token');
-  }
-
-  logout() {
-    // Eliminar el token y redirigir al login
-    localStorage.removeItem('token');
-    this.isAuthenticated = false;
-    this.router.navigate(['/login']);
-  }
+export class NavegacionComponent {
 
   constructor(private router: Router) {}
 
+  logout(): void {
+    // Clear authentication token
+    localStorage.removeItem('token');
+    // Redirect to login page
+    this.router.navigate(['/login']);
+    // Optionally, you could emit an event to AppComponent to update its state immediately,
+    // but the router navigation listener in AppComponent should handle it.
+  }
 }

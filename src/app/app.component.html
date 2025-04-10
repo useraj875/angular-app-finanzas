@@ -1,3 +1,17 @@
-
+<!-- src/app/app.component.html -->
+<!-- Conditionally render the sidebar and main layout structure -->
+<div class="app-layout" *ngIf="isAuthenticated; else loginView">
+    <!-- Load the sidebar component ONLY if authenticated -->
+    <app-navegacion></app-navegacion>
   
-<router-outlet></router-outlet>
+    <!-- Main content area ONLY if authenticated -->
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  
+  <!-- Template to show when not authenticated (e.g., Login page) -->
+  <ng-template #loginView>
+    <!-- The router-outlet will render the LoginComponent here -->
+    <router-outlet></router-outlet>
+  </ng-template>

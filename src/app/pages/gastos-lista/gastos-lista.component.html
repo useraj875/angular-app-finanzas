@@ -1,51 +1,117 @@
-<h2>Lista de Gastos</h2>
+<!-- src/app/pages/gastos-lista/gastos-lista.component.html -->
+<div class="gastos-container p-3">
 
-<div *ngIf="gastos$ | async as gastos; else loadingOrError">
-  <div *ngIf="gastos.length === 0; else gastosTable" class="alert alert-info">
-    No hay gastos registrados todavía.
+  <!-- Header Row -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Gestión de Gastos</h2>
+    <!-- Standard size button -->
+    <button class="btn btn-primary" (click)="mostrarFormulario(false)">
+      <i class="fa-solid fa-plus me-1"></i> Añadir Gasto
+    </button>
   </div>
 
-  <ng-template #gastosTable>
-    <!-- Added class "gastos-table" for specific targeting -->
-    <table class="table table-striped table-hover gastos-table">
-      <thead>
+  <!-- Form Card (Hidden initially) -->
+  <div *ngIf="formVisible" class="card mb-4 shadow-sm">
+    <div class="card-header bg-light border-bottom">
+      <h5 class="mb-0">{{ isEditing ? 'Editar Gasto' : 'Nuevo Gasto' }}</h5>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="guardarGasto()">
+        <!-- Standard size form elements -->
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label for="usuario_id" class="form-label">Usuario</label>
+            <select id="usuario_id" class="form-select" [(ngModel)]="nuevoGasto.usuario_id" name="usuario_id" required>
+              <option [ngValue]="null" disabled>Seleccione Usuario</option>
+              <option *ngFor="let usuario of usuarios" [value]="usuario.id">{{ usuario.nombre }}</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="categoria_id" class="form-label">Categoría</label>
+            <select id="categoria_id" class="form-select" [(ngModel)]="nuevoGasto.categoria_id" name="categoria_id" required>
+              <option [ngValue]="null" disabled>Seleccione Categoría</option>
+              <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="metodopago_id" class="form-label">Método de Pago</label>
+            <select id="metodopago_id" class="form-select" [(ngModel)]="nuevoGasto.metodopago_id" name="metodopago_id" required>
+              <option [ngValue]="null" disabled>Seleccione Método</option>
+              <option *ngFor="let metodo of metodosPago" [value]="metodo.id">{{ metodo.nombre }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="monto" class="form-label">Monto</label>
+            <input id="monto" type="number" class="form-control" [(ngModel)]="nuevoGasto.monto" name="monto" required min="0.01" step="0.01" />
+          </div>
+          <div class="col-md-6">
+            <label for="fecha" class="form-label">Fecha</label>
+            <input id="fecha" type="date" class="form-control" [(ngModel)]="nuevoGasto.fecha" name="fecha" required />
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="descripcion" class="form-label">Descripción</label>
+          <textarea id="descripcion" class="form-control" [(ngModel)]="nuevoGasto.descripcion" name="descripcion" required rows="3"></textarea>
+        </div>
+        <div class="d-flex justify-content-end gap-2">
+          <!-- Standard size buttons -->
+          <button type="button" class="btn btn-secondary" (click)="ocultarFormulario()">Cancelar</button>
+          <button type="submit" class="btn btn-primary">
+            {{ isEditing ? 'Actualizar Gasto' : 'Guardar Gasto' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Table Container -->
+  <!-- Using original table classes for structure/hover -->
+  <div class="table-responsive shadow-sm bg-white rounded">
+    <table class="table table-striped table-hover align-middle mb-0 gastos-table">
+      <thead class="table-light">
         <tr>
-          <!-- Added specific column classes and alignment classes -->
-          <th class="col-id">ID</th>
-          <th class="col-fecha">Fecha</th>
-          <th class="col-descripcion">Descripción</th>
-          <th class="col-monto text-right">Monto</th>
-          <th class="col-acciones text-center">Acciones</th>
+          <!-- Restore original columns + add Category -->
+          <th scope="col" class="col-fecha">Fecha</th>
+          <th scope="col" class="col-descripcion">Descripción</th>
+          <th scope="col" class="col-categoria">Categoría</th> <!-- Added Category -->
+          <th scope="col" class="col-metodo">Método Pago</th>
+          <th scope="col" class="col-usuario">Usuario</th>
+          <th scope="col" class="col-monto text-end">Monto</th>
+          <th scope="col" class="col-acciones text-center">Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let gasto of gastos">
-          <!-- Added corresponding column classes -->
-          <td class="col-id">{{ gasto.id }}</td>
           <td class="col-fecha">{{ gasto.fecha | date:'dd/MM/yyyy' }}</td>
           <td class="col-descripcion">{{ gasto.descripcion || '-' }}</td>
-          <!-- Added text-right class directly here too -->
-          <td class="col-monto text-right">{{ gasto.monto | currency:'USD':'symbol':'1.2-2' }}</td>
-          <!-- Added text-center class directly here too -->
+          <td class="col-categoria">
+             <!-- Category Badge -->
+            <span class="badge rounded-pill" [ngClass]="getCategoryTagClass(getCategoria(gasto.categoria_id)?.nombre)">
+              {{ getCategoria(gasto.categoria_id)?.nombre || 'N/A' }}
+            </span>
+          </td>
+          <td class="col-metodo">{{ getMetodoPagoNombre(gasto.metodopago_id) }}</td>
+          <td class="col-usuario">{{ getUsuarioNombre(gasto.usuario_id) }}</td>
+          <td class="col-monto text-end fw-medium">{{ gasto.monto | currency:'USD':'symbol':'1.2-2' }}</td>
           <td class="col-acciones text-center">
-            <!-- Buttons remain the same -->
-            <button class="btn btn-sm btn-outline-primary me-1" title="Editar">
-              <i class="fa-solid fa-pencil"></i>
+            <!-- Standard size buttons -->
+            <button class="btn btn-sm btn-outline-secondary me-1" title="Editar" (click)="mostrarFormulario(true, gasto)">
+              <i class="fa-solid fa-pencil fa-fw"></i> <!-- fa-fw for fixed width -->
             </button>
-            <button class="btn btn-sm btn-outline-danger" title="Eliminar">
-              <i class="fa-solid fa-trash"></i>
+            <button class="btn btn-sm btn-outline-danger" title="Eliminar" (click)="deleteGasto(gasto.id)">
+              <i class="fa-solid fa-trash fa-fw"></i>
             </button>
+          </td>
+        </tr>
+        <tr *ngIf="gastos.length === 0">
+          <td colspan="7" class="text-center text-muted py-4"> <!-- Adjusted colspan -->
+            Aún no has registrado ningún gasto.
           </td>
         </tr>
       </tbody>
     </table>
-  </ng-template>
-</div>
+  </div>
 
-<ng-template #loadingOrError>
-  <p>Cargando gastos...</p>
-</ng-template>
-
-<button class="btn btn-success mt-3">
-  <i class="fa-solid fa-plus me-1"></i> Añadir Gasto
-</button>
+</div> <!-- /gastos-container -->

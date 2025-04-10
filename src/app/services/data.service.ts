@@ -9,7 +9,7 @@ import { HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class DataService { 
-  private apiUrl = 'http://192.168.1.64:3000'; // Cambia por la URL real
+  private apiUrl = 'http://localhost:3001'; // Cambia por la URL real
 
   constructor(private http: HttpClient) {} 
 

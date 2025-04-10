@@ -1,118 +1,141 @@
 /* src/app/components/navegacion/navegacion.component.css */
+
+:host {
+  --sidebar-width: 240px; /* Define width as a variable */
+  --primary-color: #0d6efd; /* Consistent primary color */
+  --text-color-default: #495057; /* Default text */
+  --text-color-muted: #6c757d; /* Muted text/icons */
+  --hover-bg-color: #f8f9fa; /* Light hover background */
+  --border-color: #dee2e6; /* Subtle border */
+}
+
 .sidebar {
-    width: 230px; /* Un poco más ancho para acomodar iconos y texto cómodamente */
-    background-color: #1e293b; /* Un azul/gris oscuro ligeramente diferente */
-    color: #cbd5e1; /* Un gris claro para el texto */
-    padding: 20px 0;
-    height: 100vh; /* Ocupa toda la altura de la ventana */
-    display: flex;
-    flex-direction: column;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sombra sutil a la derecha */
-    position: fixed; /* Fija el sidebar */
-    left: 0;
-    top: 0;
-    z-index: 1000; /* Asegura que esté por encima de otro contenido */
-  }
-  
-  .logo {
-    text-align: center;
-    padding: 0 15px 20px 15px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #334155; /* Borde separador */
-  }
-  
-  .logo i {
-    color: #34d399; /* Un color verde menta para el icono del logo */
-  }
-  
-  .logo h3 {
-    margin: 10px 0 0 0; /* Ajuste de margen */
-    color: #f1f5f9; /* Blanco/gris muy claro */
-    font-weight: 600; /* Un poco más de peso */
-  }
-  
-  .sidebar nav {
-    flex-grow: 1;
-    overflow-y: auto; /* Scroll si hay muchos elementos */
-  }
-  
-  .sidebar nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .sidebar nav ul li a {
-    display: flex;
-    align-items: center;
-    padding: 13px 25px; /* Aumenta un poco el padding */
-    text-decoration: none;
-    color: #cbd5e1; /* Color de texto por defecto */
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-left-color 0.2s ease-in-out;
-    border-left: 4px solid transparent; /* Borde izquierdo más grueso */
-    font-size: 0.95rem; /* Tamaño de fuente ligeramente ajustado */
-  }
-  
-  .sidebar nav ul li a:hover {
-    background-color: #334155; /* Fondo al pasar el mouse */
-    color: #ffffff; /* Texto blanco al pasar el mouse */
-  }
-  
-  .sidebar nav ul li a.active-link {
-    background-color: #34d399; /* Color activo (verde menta) */
-    color: #0f172a; /* Texto oscuro para contraste en activo */
-    font-weight: 600; /* Texto en negrita para activo */
-    border-left-color: #ffffff; /* Borde blanco para activo */
-  }
-  
-  /* Estilo específico para el icono dentro del enlace activo */
-  .sidebar nav ul li a.active-link i {
-     color: #0f172a; /* Asegura que el icono también cambie de color */
-  }
-  
-  
-  .sidebar nav ul li a i {
-    margin-right: 15px; /* Más espacio entre icono y texto */
-    width: 20px; /* Ancho fijo */
-    text-align: center;
-    font-size: 1.1em; /* Tamaño del icono ligeramente más grande */
-    color: #94a3b8; /* Color grisáceo para iconos inactivos */
-    transition: color 0.2s ease-in-out; /* Transición para el color del icono */
-  }
-  
-   /* Cambia el color del icono también en hover */
-  .sidebar nav ul li a:hover i {
-     color: #ffffff;
-  }
-  
-  .sidebar nav ul li a span {
-    flex-grow: 1;
-  }
-  
-  /* Estilos para la sección inferior (opcional) */
-  .sidebar-footer {
-     padding: 15px 25px;
-     border-top: 1px solid #334155;
-     margin-top: auto; /* Empuja al fondo */
-  }
-  .sidebar-footer a {
-     display: flex;
-     align-items: center;
-     text-decoration: none;
-     color: #cbd5e1;
-     padding: 8px 0;
-     font-size: 0.9rem;
-     transition: color 0.2s ease-in-out;
-  }
-   .sidebar-footer a:hover {
-     color: #ffffff;
-   }
-  .sidebar-footer a i {
-     margin-right: 15px;
-     width: 20px;
-     text-align: center;
-     color: #94a3b8;
-  }
-   .sidebar-footer a:hover i {
-     color: #ffffff;
-   }
+  width: var(--sidebar-width);
+  background-color: #ffffff; /* White background */
+  color: var(--text-color-default);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  border-right: 1px solid var(--border-color); /* Subtle right border */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.03); /* Optional subtle shadow */
+}
+
+/* Header / Logo Area */
+.sidebar-header {
+  padding: 1.5rem 1.5rem; /* Generous padding */
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-header i {
+  margin-bottom: 0.5rem;
+  color: var(--primary-color); /* Use primary color for logo icon */
+}
+
+.app-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #343a40; /* Slightly darker title */
+}
+
+/* Navigation Area */
+.sidebar-nav {
+  flex-grow: 1;
+  overflow-y: auto; /* Scroll if needed */
+  padding: 1rem 0; /* Padding top/bottom for nav section */
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav ul li a {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1.5rem; /* Consistent padding */
+  text-decoration: none;
+  color: var(--text-color-default);
+  font-size: 0.95rem;
+  font-weight: 500; /* Slightly bolder links */
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-left-color 0.2s ease-in-out;
+  border-left: 4px solid transparent; /* Placeholder for active border */
+  margin: 0.2rem 0; /* Small margin between links */
+}
+
+.sidebar-nav ul li a i {
+  margin-right: 1rem; /* Space between icon and text */
+  width: 20px; /* Fixed width for alignment */
+  text-align: center;
+  font-size: 1.1em;
+  color: var(--text-color-muted); /* Muted color for icons */
+  transition: color 0.2s ease-in-out;
+}
+
+/* Hover State */
+.sidebar-nav ul li a:hover {
+  background-color: var(--hover-bg-color);
+  color: #212529; /* Darken text slightly on hover */
+}
+.sidebar-nav ul li a:hover i {
+  color: var(--primary-color); /* Highlight icon color on hover */
+}
+
+/* Active Link State */
+.sidebar-nav ul li a.active-link {
+  background-color: transparent; /* Keep background clean */
+  color: var(--primary-color); /* Highlight text */
+  font-weight: 600; /* Make active link bolder */
+  border-left-color: var(--primary-color); /* Use left border as indicator */
+}
+
+.sidebar-nav ul li a.active-link i {
+  color: var(--primary-color); /* Highlight icon */
+}
+
+/* Footer / Logout Area */
+.sidebar-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: auto; /* Pushes to the bottom */
+}
+
+.sidebar-footer a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-color-muted); /* Muted color for logout */
+  padding: 0.6rem 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+  border-left: 4px solid transparent; /* Match link structure */
+}
+
+.sidebar-footer a:hover {
+  color: var(--primary-color); /* Highlight on hover */
+}
+
+.sidebar-footer a i {
+  margin-right: 1rem;
+  width: 20px;
+  text-align: center;
+  color: inherit; /* Inherit color from parent anchor */
+}
+
+/* Ensure Font Awesome fixed width works */
+.fa-fw {
+  text-align: center;
+  width: 1.25em;
+}
+
+/* Text color utility if needed */
+.text-primary {
+    color: var(--primary-color) !important;
+}
