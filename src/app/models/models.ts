@@ -36,12 +36,11 @@ export interface Usuario {
   }
   export interface Ahorro {
     id: number;
-    usuario_id: number;
+    usuario_id: string;
     monto_objetivo: number;
-    monto_ahorrado: number; 
-    fecha_inicio: string | Date; 
-    ahorro_diario_calculado?: number; 
-
+    monto_ahorrado: number;
+    ahorro_diario_calculado: number; // Campo calculado
+    fecha_inicio: string;
   }
   
   // Optional denormalized interface (keep for potential future use if API provides joined data)

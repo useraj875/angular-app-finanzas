@@ -79,4 +79,20 @@ export class DataService {
   deleteIngreso(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/ingresos/${id}`);
   }
+  //Tabla ahorros
+  getAhorros(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/ahorros`);
+  }
+  
+  addAhorro(nuevoAhorro: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/ahorros`, nuevoAhorro);
+  }
+  
+  updateAhorro(id: number, ahorro: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/ahorros/${id}`, ahorro);
+  }
+  
+  deleteAhorro(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/ahorros/${id}`);
+  }
 }

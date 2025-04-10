@@ -1,2 +1,44 @@
 <h2>Metas de Ahorro</h2>
-<p>Aquí se mostrará el progreso de tus ahorros.</p>
+
+<form (ngSubmit)="isEditing ? updateAhorro() : addAhorro()">
+  <label for="usuario_id">Usuario ID:</label>
+  <input type="text" [(ngModel)]="nuevoAhorro.usuario_id" name="usuario_id" required />
+
+  <label for="monto_objetivo">Monto Objetivo:</label>
+  <input type="number" [(ngModel)]="nuevoAhorro.monto_objetivo" name="monto_objetivo" required />
+
+  <label for="monto_ahorrado">Monto Ahorrado:</label>
+  <input type="number" [(ngModel)]="nuevoAhorro.monto_ahorrado" name="monto_ahorrado" required />
+
+  <label for="fecha_inicio">Fecha de Inicio:</label>
+  <input type="date" [(ngModel)]="nuevoAhorro.fecha_inicio" name="fecha_inicio" required />
+
+  <button type="submit">{{ isEditing ? 'Actualizar' : 'Agregar' }}</button>
+</form>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Usuario ID</th>
+      <th>Monto Objetivo</th>
+      <th>Monto Ahorrado</th>
+      <th>Ahorro Diario Calculado</th>
+      <th>Fecha de Inicio</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ahorro of ahorros">
+      <td>{{ ahorro.id }}</td>
+      <td>{{ ahorro.usuario_id }}</td>
+      <td>{{ ahorro.monto_objetivo }}</td>
+      <td>{{ ahorro.monto_ahorrado }}</td>
+      <td>{{ ahorro.ahorro_diario_calculado }}</td>
+      <td>{{ ahorro.fecha_inicio }}</td>
+      <td>
+        <button (click)="editAhorro(ahorro)">Editar</button>
+        <button (click)="deleteAhorro(ahorro.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
