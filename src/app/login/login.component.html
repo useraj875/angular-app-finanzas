@@ -1,0 +1,20 @@
+<h2>{{ modo === 'login' ? 'Iniciar Sesión' : 'Registrar Usuario' }}</h2>
+
+<form (ngSubmit)="modo === 'login' ? login() : registrar()" #loginForm="ngForm">
+  <label for="nombre">Nombre:</label>
+  <input type="text" [(ngModel)]="nombre" name="nombre" required />
+
+  <label for="contrasena">Contraseña:</label>
+  <input type="password" [(ngModel)]="contrasena" name="contrasena" required />
+
+  <button type="submit">{{ modo === 'login' ? 'Iniciar sesión' : 'Registrar' }}</button>
+</form>
+
+<!-- Mensajes de error o éxito -->
+<p *ngIf="error" style="color: red;">{{ error }}</p>
+<p *ngIf="mensaje" style="color: green;">{{ mensaje }}</p>
+
+<!-- Botón para alternar entre login y registro -->
+<button (click)="alternarModo()">
+  {{ modo === 'login' ? '¿No tienes una cuenta? Regístrate aquí' : '¿Ya tienes cuenta? Inicia sesión aquí' }}
+</button>
