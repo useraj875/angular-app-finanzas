@@ -1,2 +1,43 @@
-<h2>Lista de Ingresos</h2>
-<p>Aquí se mostrarán tus ingresos registrados.</p>
+<h2>Gestión de Ingresos</h2>
+
+<form (ngSubmit)="isEditing ? updateIngreso() : addIngreso()">
+  <label for="usuario_id">Usuario ID:</label>
+  <input type="text" [(ngModel)]="nuevoIngreso.usuario_id" name="usuario_id" required />
+
+  <label for="monto">Monto:</label>
+  <input type="number" [(ngModel)]="nuevoIngreso.monto" name="monto" required />
+
+  <label for="fecha">Fecha:</label>
+  <input type="date" [(ngModel)]="nuevoIngreso.fecha" name="fecha" required />
+
+  <label for="tipoingreso_id">Tipo de Ingreso:</label>
+  <input type="number" [(ngModel)]="nuevoIngreso.tipoingreso_id" name="tipoingreso_id" required />
+
+  <button type="submit">{{ isEditing ? 'Actualizar' : 'Agregar' }}</button>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Usuario ID</th>
+      <th>Monto</th>
+      <th>Fecha</th>
+      <th>Tipo de Ingreso</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ingreso of ingresos">
+      <td>{{ ingreso.id }}</td>
+      <td>{{ ingreso.usuario_id }}</td>
+      <td>{{ ingreso.monto }}</td>
+      <td>{{ ingreso.fecha }}</td>
+      <td>{{ ingreso.tipoingreso_id }}</td>
+      <td>
+        <button (click)="editIngreso(ingreso)">Editar</button>
+        <button (click)="deleteIngreso(ingreso.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

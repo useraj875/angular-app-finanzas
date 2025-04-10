@@ -4,18 +4,22 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
-
+import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class DataService { 
-  private apiUrl = 'http://192.168.1.64:3000'; // Cambia por la URL real
+  private apiUrl = 'http://192.168.1.101:3000'; // Cambia por la URL real
 
   constructor(private http: HttpClient) {} 
 
   
   login(nombre: string, contrasena: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, { nombre, contrasena });
+    return this.http.post<any>(`${this.apiUrl}/login`, { nombre, contrasena }).pipe(
+      tap((response) => {
+        localStorage.setItem('token', response.token); // Guarda el token en localStorage
+      })
+    );
   }
 
   registrar(nombre: string, contrasena: string): Observable<any> {
@@ -58,5 +62,21 @@ export class DataService {
 
   deletegasto(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/gastos/${id}`);
+  }
+  //tabla ingresos
+  getIngresos(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/ingresos`);
+  }
+  
+  addIngreso(nuevoIngreso: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/ingresos`, nuevoIngreso);
+  }
+  
+  updateIngreso(id: number, ingreso: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/ingresos/${id}`, ingreso);
+  }
+  
+  deleteIngreso(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/ingresos/${id}`);
   }
 }

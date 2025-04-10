@@ -116,3 +116,7 @@
    .sidebar-footer a:hover i {
      color: #ffffff;
    }
+   a.active {
+    font-weight: bold;
+    color: blue;
+  }

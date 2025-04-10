@@ -31,9 +31,9 @@ export interface Usuario {
     id: number;
     usuario_id: number;
     monto: number;
-    fecha: string | Date; 
+    fecha: string;
+    tipoingreso_id: number; 
   }
-  
   export interface Ahorro {
     id: number;
     usuario_id: number;
