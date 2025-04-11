@@ -1,161 +1,108 @@
 /* src/app/pages/dashboard/dashboard.component.css */
 
+:host {
+  --bs-body-bg: #f8f9fa; /* Use CSS variable for background */
+  --bs-border-color: #dee2e6; /* Standard border color */
+  --bs-card-border-radius: 0.375rem; /* Standard card radius */
+  --bs-card-box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+  --bs-card-header-bg: #f8f9fa;
+  --bs-text-muted: #6c757d;
+  --bs-gray-300: #dddfeb; /* For icons */
+}
+
 .dashboard-container {
-    padding: 15px; /* Add some padding around the content */
-  }
-  
-  /* Summary Card Styles */
-  .summary-card {
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .summary-card:hover {
-     transform: translateY(-3px); /* Slight lift on hover */
-  }
-  
-  .summary-card .card-title {
-    font-size: 0.9rem;
-    margin-bottom: 0.25rem;
-  }
-  
-  .summary-card .card-text {
-    margin-bottom: 0;
-    font-size: 1.8rem; /* Adjust size as needed */
-  }
-  
-  .summary-card i {
-    font-size: 2rem; /* Adjust icon size */
-  }
-  
-  /* Card for Chart and Budgets */
-  .card {
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  }
-  
-  .card-header {
-    background-color: #f8f9fa; /* Light background for header */
-    border-bottom: 1px solid #dee2e6;
-    padding: 0.75rem 1.25rem;
-  }
-  
-  .card-title {
-    font-weight: 500;
-  }
-  
-  /* Chart Placeholder */
-  .chart-placeholder {
-    background-color: #f8f9fa;
-    border-radius: 5px;
-    border: 1px dashed #ced4da;
-  }
-  
-  /* Legend Styling */
-  .legend-color-box {
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    border-radius: 3px;
-  }
-  
-  /* Budget Progress Bar Styling */
-  .list-group-item {
-    border: none; /* Remove default list group borders */
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-  }
-  
-  .progress {
-    background-color: #e9ecef; /* Background of the progress track */
-    border-radius: 5px;
-  }
-  
-  .progress-bar {
-    transition: width 0.6s ease;
-    border-radius: 5px;
-    /* Define colors used by getProgressBarClass */
-    &.bg-primary { background-color: #0d6efd !important; }
-    &.bg-warning { background-color: #ffc107 !important; }
-    &.bg-danger { background-color: #dc3545 !important; }
-  }
-  
-  /* Responsive adjustments */
-  .display-6 {
-    font-size: 1.75rem; /* Slightly smaller display font on smaller screens if needed */
-  }
-  
-  @media (min-width: 1200px) {
-    .display-6 {
-      font-size: 2rem; /* Larger font on XL screens */
-    }
-     .summary-card i {
-      font-size: 2.5rem; /* Larger icons on XL screens */
-    }
-  }
-  
-  /* Ensure Bootstrap utility classes work if not globally available */
-  .mb-4 { margin-bottom: 1.5rem !important; }
-  .mb-3 { margin-bottom: 1rem !important; }
-  .mb-1 { margin-bottom: 0.25rem !important; }
-  .mb-0 { margin-bottom: 0 !important; }
-  .mt-3 { margin-top: 1rem !important; }
-  .me-2 { margin-right: 0.5rem !important; }
-  .px-0 { padding-left: 0 !important; padding-right: 0 !important; }
-  .py-5 { padding-top: 3rem !important; padding-bottom: 3rem !important; }
-  .fw-bold { font-weight: 700 !important; }
-  .text-muted { color: #6c757d !important; }
-  .text-primary { color: #0d6efd !important; }
-  .text-success { color: #198754 !important; }
-  .text-danger { color: #dc3545 !important; }
-  .text-info { color: #0dcaf0 !important; }
-  .text-warning { color: #ffc107 !important; }
-  .text-center { text-align: center !important; }
-  .opacity-75 { opacity: .75 !important; }
-  .d-flex { display: flex !important; }
-  .justify-content-between { justify-content: space-between !important; }
-  .align-items-center { align-items: center !important; }
-  .flex-wrap { flex-wrap: wrap !important; }
-  .gap-3 { gap: 1rem !important; }
-  .list-unstyled { padding-left: 0; list-style: none; }
-  .list-group { display: flex; flex-direction: column; padding-left: 0; margin-bottom: 0; border-radius: .25rem; }
-  .list-group-flush > .list-group-item { border-width: 0 0 1px; }
-  .list-group-flush > .list-group-item:last-child { border-bottom-width: 0; }
-  .h-100 { height: 100% !important; }
-  
-  /* Basic Grid system (like Bootstrap's row/col) */
-  .row {
-    --bs-gutter-x: 1.5rem; /* Horizontal gutter */
-    --bs-gutter-y: 1.5rem; /* Vertical gutter */
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: calc(-1 * var(--bs-gutter-y));
-    margin-right: calc(-.5 * var(--bs-gutter-x));
-    margin-left: calc(-.5 * var(--bs-gutter-x));
-  }
-  .row > * {
-    flex-shrink: 0;
-    width: 100%;
-    max-width: 100%;
-    padding-right: calc(var(--bs-gutter-x) * .5);
-    padding-left: calc(var(--bs-gutter-x) * .5);
-    margin-top: var(--bs-gutter-y);
-  }
-  .g-4 { /* Specific gutter class used in HTML */
-    --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 1.5rem;
-  }
-  
-  /* Column classes */
-  @media (min-width: 768px) { /* Medium devices (tablets, 768px and up) */
-    .col-md-6 { flex: 0 0 auto; width: 50%; }
-  }
-  @media (min-width: 992px) { /* Large devices (desktops, 992px and up) */
-    .col-lg-6 { flex: 0 0 auto; width: 50%; }
-  }
-  @media (min-width: 1200px) { /* Extra large devices (large desktops, 1200px and up) */
-    .col-xl-3 { flex: 0 0 auto; width: 25%; }
-  }
+  background-color: var(--bs-body-bg);
+}
+
+/* Enhanced KPI Card Styles */
+.kpi-card .card-body {
+  padding: 1rem; /* Adjust padding */
+}
+
+.kpi-icon-bg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* Prevent icon container from shrinking */
+}
+.kpi-icon-bg i {
+  opacity: 0.8;
+}
+/* Specific KPI background colors */
+.kpi-icon-bg.bg-primary { background-color: rgba(var(--bs-primary-rgb), 0.15); color: var(--bs-primary);}
+.kpi-icon-bg.bg-success { background-color: rgba(var(--bs-success-rgb), 0.15); color: var(--bs-success);}
+.kpi-icon-bg.bg-danger { background-color: rgba(var(--bs-danger-rgb), 0.15); color: var(--bs-danger);}
+.kpi-icon-bg.bg-info { background-color: rgba(var(--bs-info-rgb), 0.15); color: var(--bs-info);}
+
+
+/* General Card Styles */
+.card {
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-card-border-radius);
+  box-shadow: var(--bs-card-box-shadow);
+  transition: box-shadow 0.2s ease-in-out;
+}
+.card:hover {
+   box-shadow: 0 .5rem 1rem rgba(0,0,0,.1); /* Slightly larger shadow on hover */
+}
+
+.card-header {
+  background-color: var(--bs-card-header-bg);
+  border-bottom: 1px solid var(--bs-border-color);
+  font-weight: 500;
+  padding: 0.75rem 1rem; /* Adjust padding */
+}
+
+/* Chart Container */
+.chart-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Utility classes (ensure these are available globally or define here) */
+.h4 { font-size: 1.5rem; }
+.h5 { font-size: 1.25rem; }
+.small { font-size: 0.875em; }
+.fw-bold { font-weight: 700 !important; }
+.fw-medium { font-weight: 500 !important; }
+.fw-light { font-weight: 300 !important; }
+.text-muted { color: var(--bs-text-muted) !important; }
+.text-dark { color: #212529 !important; } /* Example dark color */
+.text-uppercase { text-transform: uppercase !important; }
+.mb-0 { margin-bottom: 0 !important; }
+.mb-1 { margin-bottom: 0.25rem !important; }
+.mb-4 { margin-bottom: 1.5rem !important; }
+.me-3 { margin-right: 1rem !important; }
+.py-2 { padding-top: 0.5rem !important; padding-bottom: 0.5rem !important; }
+.py-3 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+.pt-2 { padding-top: 0.5rem !important; }
+.px-lg-4 { padding-right: 1.5rem !important; padding-left: 1.5rem !important; } /* Example responsive padding */
+.g-4 { --bs-gutter-x: 1.5rem; --bs-gutter-y: 1.5rem; } /* Increased grid gap */
+.overflow-hidden { overflow: hidden !important; }
+.flex-shrink-0 { flex-shrink: 0 !important; }
+.flex-grow-1 { flex-grow: 1 !important; }
+.d-flex { display: flex !important; }
+.align-items-center { align-items: center !important; }
+.justify-content-center { justify-content: center !important; }
+.justify-content-between { justify-content: space-between !important; }
+.w-100 { width: 100% !important; }
+.border-0 { border: 0 !important; }
+.shadow-sm { box-shadow: var(--bs-card-box-shadow) !important; }
+
+/* Ensure Font Awesome icons are styled if needed */
+.fa-lg { font-size: 1.33333em; }
+
+/* Define Bootstrap color variables if not using Bootstrap */
+:host {
+  --bs-primary: #0d6efd;
+  --bs-success: #198754;
+  --bs-danger: #dc3545;
+  --bs-info: #0dcaf0;
+  --bs-primary-rgb: 13, 110, 253;
+  --bs-success-rgb: 25, 135, 84;
+  --bs-danger-rgb: 220, 53, 69;
+  --bs-info-rgb: 13, 202, 240;
+}
