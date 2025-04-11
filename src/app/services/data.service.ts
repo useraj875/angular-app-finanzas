@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 // Import models
-import { Gasto, Ingreso, Usuario, Categoria, MetodoPago, TipoIngreso } from '../models/models';
+import { Gasto, Ingreso, Usuario, Categoria, MetodoPago, TipoIngreso, Ahorro } from '../models/models';
 
 @Injectable({
   providedIn: 'root'
@@ -92,5 +92,30 @@ export class DataService {
     // Backend route is DELETE /ingresos/:id
     return this.http.delete<any>(`${this.apiUrl}/ingresos/${id}`);
   }
+
+  // --- NEW: Ahorros CRUD ---
+  getAhorros(): Observable<Ahorro[]> { // Use specific type
+    return this.http.get<Ahorro[]>(`${this.apiUrl}/ahorros`);
+  }
+
+  addAhorro(nuevoAhorro: { usuario_id: number | null, monto_objetivo: number }): Observable<Ahorro> { // Use specific type and required fields for POST
+    // Backend route is POST /ahorros
+    return this.http.post<Ahorro>(`${this.apiUrl}/ahorros`, nuevoAhorro);
+  }
+
+  updateAhorro(id: number, ahorro: any): Observable<Ahorro> { // Use specific type
+    // Backend route is PUT /ahorros/:id
+    // Backend expects: usuario_id, monto_objetivo, monto_ahorrado, fecha_inicio
+    return this.http.put<Ahorro>(`${this.apiUrl}/ahorros/${id}`, ahorro);
+  }
+
+  deleteAhorro(id: number): Observable<any> {
+    // Backend route is DELETE /ahorros/:id
+    return this.http.delete<any>(`${this.apiUrl}/ahorros/${id}`);
+  }
+  // --- END NEW ---
+
+
+
 
 }

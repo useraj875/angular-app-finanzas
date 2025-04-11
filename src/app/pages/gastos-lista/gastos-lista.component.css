@@ -100,9 +100,7 @@ textarea.form-control { min-height: calc(1.5em + .75rem + 2px); } /* Adjust heig
 
 /* --- Original Column Widths (Restored & Adjusted) --- */
 /* Target the specific table */
-.gastos-table {
-  /* table-layout: fixed; /* Consider if content overflows badly */
-}
+
 .gastos-table .col-fecha { width: 12%; white-space: nowrap; }
 .gastos-table .col-descripcion { width: 28%; white-space: normal; } /* Allow wrap */
 .gastos-table .col-categoria { width: 15%; } /* Added */
@@ -147,7 +145,7 @@ textarea.form-control { min-height: calc(1.5em + .75rem + 2px); } /* Adjust heig
 .d-flex { display: flex !important; }
 .justify-content-between { justify-content: space-between !important; }
 .justify-content-end { justify-content: flex-end !important; }
-.align-items-center { align-items-center !important; }
+.align-items-center { align-items: center; }
 .shadow-sm { box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important; }
 .bg-white { background-color: #fff !important; }
 .bg-light { background-color: #f8f9fa !important; }
